@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rod.apps.RodConfig'
+    'rod.apps.RodConfig',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
