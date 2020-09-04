@@ -47,7 +47,7 @@ class Trasy(models.Model):
 
 class TypyOtoczenia(models.Model):
     id_otoczenia = models.AutoField(primary_key=True)
-    typ = models.CharField(db_column='Typ', max_length=-1)  # Field name made lowercase.
+    typ = models.CharField(db_column='Typ', max_length=30)  # Field name made lowercase.
 
     class Meta:
         managed = False
