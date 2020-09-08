@@ -1,25 +1,51 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib.auth.models import  User,auth
 
 def home(request):
-    return render(request,'rod/home.html',{'title':'Strona główna'})
+    if request.user.is_authenticated:
+        return render(request,'rod/home.html',{'title':'Strona główna'})
+    else:
+        return redirect('/')
 
 def last_reports(request):
-    return render(request,'rod/last_reports.html',{'title':'Ostatnie zgłoszenia'})
+    if request.user.is_authenticated:
+        return render(request,'rod/last_reports.html',{'title':'Ostatnie zgłoszenia'})
+    else:
+        return redirect('/')
+
 
 def drones(request):
-    return render(request,'rod/drones.html',{'title':'Drony'})
+    if request.user.is_authenticated:
+        return render(request,'rod/drones.html',{'title':'Drony'})
+    else:
+        return redirect('/')
 
 def map(request):
-    return render(request,'rod/map.html',{'title':'Mapa'})
+    if request.user.is_authenticated:
+        return render(request,'rod/map.html',{'title':'Mapa'})
+    else:
+        return redirect('/')
 
 def shedule(request):
-    return render(request,'rod/shedule.html',{'title':'Rozkład jazdy'})
+    if request.user.is_authenticated:
+        return render(request,'rod/shedule.html',{'title':'Rozkład jazdy'})
+    else:
+        return redirect('/')
 
 def all_archive(request):
-    return render(request,'rod/all_archive.html',{'tittle':'Wszystkie zgłoszenia'})
+    if request.user.is_authenticated:
+        return render(request,'rod/all_archive.html',{'tittle':'Wszystkie zgłoszenia'})
+    else:
+        return redirect('/')
 
 def interv_archive(request):
-    return render(request, 'rod/interv_archive.html',{'title':'Zgłoszenia niewymagające interwencji'})
+    if request.user.is_authenticated:
+        return render(request, 'rod/interv_archive.html',{'title':'Zgłoszenia niewymagające interwencji'})
+    else:
+        return redirect('/')
 
 def noninterv_archive(request):
-    return render(request,'rod/noninterv_archive.html',{'title':'Zgłoszenia wymagające interwencji'})
+    if request.user.is_authenticated:
+        return render(request,'rod/noninterv_archive.html',{'title':'Zgłoszenia wymagające interwencji'})
+    else:
+        return redirect('/')

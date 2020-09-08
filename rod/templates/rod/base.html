@@ -16,6 +16,9 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	  <a class="navbar-brand" href="/home">System wykrywania zagrożeń</a>
+        {% if user.is_authenticated %}
+        <h3>Witaj {{ user.first_name }} {{ user.last_name }}</h3>
+        {% endif %}
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	  </button>
@@ -44,7 +47,7 @@
             </div>
           </li>
           <li class="nav-item" >
-                <a class="nav-link active" href="#">Wyloguj się</a>
+                <a class="nav-link active" href="/logout">Wyloguj się</a>
           </li>
 		</ul>
 	  </div>
