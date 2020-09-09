@@ -25,7 +25,6 @@ def register(request):
         return redirect('/home')
     else:
         if request.method=='POST':
-            print('powinno być')
             first_name=request.POST.get('first_name')
             last_name = request.POST.get('last_name')
             username = request.POST.get('username')

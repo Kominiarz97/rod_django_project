@@ -12,18 +12,19 @@
     <title>Zaloguj się</title>
   </head>
   <body>
-    <div class="stacked" >
+  <br>
+    <div class="stacked">
         <form method="POST">
           {% csrf_token %}
-          <div class="form-group">
+          <div class="form-group col-lg-3">
             <label for="username">Nazwa Użytkownika</label>
             <input type="text" class="form-control" name='username' placeholder="Podaj nazwe użytkownika">
           </div>
-          <div class="form-group">
+          <div class="form-group col-lg-2">
             <label for="password">Hasło</label>
             <input type="password" class="form-control" name='password' placeholder="Podaj hasło">
           </div>
-          <button type="submit" class="btn btn-primary">Zaloguj się</button>
+          <button type="submit" class="btn btn-primary col-lg-2">Zaloguj się</button>
         </form>
   </div>
     <h3>Jeśli nie posiadasz konta <a href="/register">zarejestruj się</a> </h3>
