@@ -1,1 +1,26 @@
 {% extends 'rod/base.html' %}
+
+{% block content %}
+    <br><br>
+    <div class="content-section">
+        <div id="mapid"></div>
+    </div>
+
+<script>
+    var mymap = L.map('mapid').setView([51.2475, 22.5728], 10);
+    const marker = L.marker([0,0]).addTo(mymap);
+    const marker2 = L.marker([0,0]).addTo(mymap);
+    const marker3 = L.marker([0,0]).addTo(mymap);
+
+    const attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    const tiles = L.tileLayer(tileUrl,attribution)
+    tiles.addTo(mymap)
+    marker.setLatLng([51.199301,22.624369]).bindPopup('Dron numer jeden.');
+    marker2.setLatLng([51.199301,22.224369]).bindPopup('Dron numer dwa');
+    marker3.setLatLng([51.299301,22.424369]).bindPopup('Dron numer trzy .');;
+
+    marker.setContent()
+
+</script>
+{% endblock %}

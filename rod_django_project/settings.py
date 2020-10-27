@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'rod_django_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rod_django',
+        'NAME': 'rod_web',
         'USER':'postgres',
         'PASSWORD':'root',
         'HOST':'localhost'
