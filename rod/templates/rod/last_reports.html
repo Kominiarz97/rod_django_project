@@ -1,1 +1,17 @@
 {% extends 'rod/base.html' %}
+
+
+{% block content %}
+    {% if zgloszenia %}
+        {% for zgloszenie in zgloszenia %}
+            {% if zgloszenie.zarejestrowane == False %}
+                <h3>Zgloszenie nr {{ zgloszenie.id }}</h3>
+                <p>{{ zgloszenie.data_zgloszenia }} {{ zgloszenie.godz_zgloszenia }}</p>
+                <p>Typ zagrozenia: {{ zgloszenie.rodzaj_zagrozenia }}</p>
+                <p>Trasa: {{ zgloszenie.id_trasy }} </p>
+                <p>Odcinek: {{ zgloszenie.id_odcinka_trasy }}</p>
+                <p> {{ zgloszenie.zdjecie }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
