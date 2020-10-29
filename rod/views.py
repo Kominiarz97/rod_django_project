@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import  User, auth
-from .models import Zagrozenia, Zgloszenia
+from .models import *
 
 def home(request):
     if request.user.is_authenticated:
@@ -19,7 +19,8 @@ def last_reports(request):
 
 def drones(request):
     if request.user.is_authenticated:
-        return render(request,'rod/drones.html', {'title':'Drony'})
+        drony = Drony.objects.all()
+        return render(request, 'rod/drones.html', {'title': 'Drony', 'drony': drony})
     else:
         return redirect('/')
 
@@ -53,6 +54,16 @@ def noninterv_archive(request):
         return render(request,'rod/noninterv_archive.html',{'title':'Zgłoszenia wymagające interwencji'})
     else:
         return redirect('/')
-
+def new_drone(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST.get('name'):
+                dron = Drony()
+                dron.nazwa = request.POST.get('name')
+                dron.pojemnosc_akumulatora = int(request.POST.get('capacity'))
+                dron.predkosc_przelotowa = int(request.POST.get('speed'))
+                dron.oswietlenie = request.POST.get('lighting')
+                dron.save()
+        return render(request, 'rod/new_drone.html', {'title': 'Drony_nowe'})
 
 

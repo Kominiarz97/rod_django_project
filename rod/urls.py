@@ -10,4 +10,5 @@ urlpatterns = [
     path('all-archive/', views.all_archive, name='rod-all-archive'),
     path('interv-archive/', views.interv_archive, name='rod-interv-archive'),
     path('noninterv-archive/', views.noninterv_archive, name='rod-noninterv-archive'),
+    path('drones/new', views.new_drone, name='rod-new_drone'),
 ]

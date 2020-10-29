@@ -1,0 +1,39 @@
+{% extends 'rod/base.html' %}
+{% block content %}
+<br>
+    <div class="stacked" >
+        <h3><strong>DODAWANIE NOWEJ PLATFORMY LATAJACEJ DO BAZY</strong> </h3>
+        <hr>
+        <form method="POST">
+             {% csrf_token %}
+              <div class="form-group col-lg-2">
+                  <label for="name"> <strong>Nazwa drona:</strong>
+                <input type="text" class="form-control" name="name" required>
+                </label>
+              </div>
+              <div class="form-group col-lg-3">
+                  <label for="capacity"><strong>Pojemnosc akumulatora</strong>
+                    <input type="text" class="form-control" name="capacity" placeholder="Podaj w mAh" required>
+                </label>
+              </div>
+              <div class="form-group col-lg-3">
+                  <label for="speed"> <strong>Predkosc przelotowa:</strong>
+                <input type="text" class="form-control" name="speed" placeholder="Podaj w km/h" required>
+                </label>
+              </div>
+               <div class="form-group col-lg-3">
+                   <label><strong>Oswietlenie:</strong> </label> <br>
+                    <input type="radio" id="lighting" name="lighting" value="True" required>
+                    <label for="lighting">Tak</label>
+
+                    <input type="radio" id="no_lighting" name="lighting" value="False">
+                    <label for="no_lighting">Nie</label>
+               </div>
+              <button type="submit" class="btn btn-primary">Dodaj</button>
+              <button type="reset" class="btn btn-dark">Reset</button>
+              <input class="btn btn-primary" type="button" value="Powrót do listy"  onclick="location.href='{% url 'rod-drones' %}'"/>
+
+        </form>
+    </div>
+    <br>
+{% endblock %}

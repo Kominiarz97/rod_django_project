@@ -1,9 +1,12 @@
 body {
-  background: #DADDD8;
-  color: #494949;
+  background-color: #c2c0c0;
+  color: #2b2b2b;
+
 }
-footer {
-  background-color: #878C8F;
-  color: #878C8F;
+.block {
+  margin-left: 10px;
+  margin-right: 10px;
 }
+#mapid { height: 700px;}
+
 
