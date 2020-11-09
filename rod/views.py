@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import  User, auth
 from .models import *
+from django.core.paginator import Paginator
 
 def home(request):
     if request.user.is_authenticated:
@@ -19,8 +20,12 @@ def last_reports(request):
 
 def drones(request):
     if request.user.is_authenticated:
-        drony = Drony.objects.all()
-        return render(request, 'rod/drones.html', {'title': 'Drony', 'drony': drony})
+        drony = Drony.objects.get_queryset().order_by('-id_drona')
+        paginator = Paginator(drony, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'rod/drones.html', {'title': 'Drony', 'drony': page_obj})
+
     else:
         return redirect('/')
 

@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	  <a class="navbar-brand" href="/home">System wykrywania zagrożeń</a>
         {% if user.is_authenticated %}
-        <h3 class="text-primary">Witaj {{ user.first_name }} {{ user.last_name }}</h3>
+        <h5 class="text-primary">Witaj {{ user.first_name }} {{ user.last_name }}</h5>
         {% endif %}
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -67,7 +67,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </body>
 
-  <footer class="footer fixed-bottom">
-
-  </footer>
+  <footer class="footer fixed-bottom bg-dark">
+      <div class="footer-copyright text-light text-center py-3">
+          © 2020 Copyright:
+          <br>
+          Patryk Koryga: patryk.koryga@pollub.edu.pl
+          <br>
+          Maciej Krawiec: maciej.krawiec@pollub.edu.pl
+      </div>
+    </footer>
 </html>
