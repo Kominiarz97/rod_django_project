@@ -2,6 +2,11 @@
 
 {% block content %}
     <div class="container z-depth-1 p-5 my-5">
+    {% if not drony %}
+        <div class="alert alert-warning" role="alert">
+            <h1>BRAK DRONÓW W BAZIE!</h1>
+        </div>
+    {% endif %}
         <input class="btn btn-primary" type="button" value="Dodaj Nowy"  onclick="location.href='{% url 'rod-new_drone' %}'"/>
 
     <!------------------------------------------------------WYSWIETLANIE DRONOW Z BAZY------------------------------------------------------>
