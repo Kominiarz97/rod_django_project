@@ -12,7 +12,6 @@ def home(request):
 def last_reports(request):
     if request.user.is_authenticated:
         zgloszenia = Zgloszenia.objects.all()
-
         return render(request, 'rod/last_reports.html', {'title' : 'Ostatnie zgłoszenia', 'zgloszenia':zgloszenia})
     else:
         return redirect('/')

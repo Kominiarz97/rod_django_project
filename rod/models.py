@@ -1,14 +1,6 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
-# Create your models here.
 
 
 class Drony(models.Model):
@@ -65,17 +57,17 @@ class Zagrozenia(models.Model):
 
 class Zgloszenia(models.Model):
    id_zgloszenia = models.AutoField(primary_key=True)
-   zdjecie = models.ImageField(db_column='Zdjecie', default=None)
-   data_zgloszenia = models.DateTimeField(db_column='Data_zgloszenia')
-   godz_zgloszenia = models.DateTimeField(db_column='Godz_zgloszenia')
-   id_drona = models.ForeignKey(Drony, models.DO_NOTHING, db_column='id_drona')
-   id_trasy = models.ForeignKey(Trasy, models.DO_NOTHING, db_column='id_trasy')
-   id_odcinka_trasy = models.ForeignKey(PodzialTrasy, models.DO_NOTHING, db_column='id_odcinka_trasy')
-   rodzaj_zagrozenia = models.ForeignKey(Zagrozenia, models.DO_NOTHING, db_column='Rodzaj_zagrozenia')
-   lokalizacja_gps = models.CharField(db_column='Lokalizacja_gps', max_length=30)
-   zarejestrowane = models.BooleanField(db_column='Zarejestrowane', default=False)
+   zdjecie = models.BinaryField(db_column="Zdjecie",blank=True)
+   data_zgloszenia = models.DateField(db_column='Data_zgloszenia', blank=True, null=True)
+   godz_zgloszenia = models.TimeField(db_column='Godz_zgloszenia', blank=True, null=True)
+   id_drona = models.ForeignKey(Drony, models.DO_NOTHING, db_column='id_drona', blank=True, null=True)
+   id_trasy = models.ForeignKey(Trasy, models.DO_NOTHING, db_column='id_trasy', blank=True, null=True)
+   id_odcinka_trasy = models.ForeignKey(PodzialTrasy, models.DO_NOTHING, db_column='id_odcinka_trasy', blank=True, null=True)
+   rodzaj_zagrozenia = models.ForeignKey(Zagrozenia, models.DO_NOTHING, db_column='Rodzaj_zagrozenia', blank=True, null=True)
+   lokalizacja_gps = models.CharField(db_column='Lokalizacja_gps', max_length=30, blank=True)
+   zarejestrowane = models.BooleanField(db_column='Zarejestrowane', default=False, blank=True)
    id_uzytkownika = models.ForeignKey(User, models.CASCADE, db_column='id_uzytkownika', blank=True, null=True)
-   zgloszenie_sluzbom = models.BooleanField(db_column='Zgloszenie_sluzbom', default=False)
+   zgloszenie_sluzbom = models.BooleanField(db_column='Zgloszenie_sluzbom', default=False, blank=True)
 
    class Meta:
       db_table = 'Zgloszenia'
