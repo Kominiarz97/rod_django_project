@@ -69,6 +69,7 @@
     <!------------------------------------------------------WYSWIETLANIE DRONOW Z BAZY------------------------------------------------------>
 
     <!------------------------------------------------------NUMERACJA STRON------------------------------------------------------>
+    {% if drony %}
       {% if drony.has_previous %}
             <a class="btn btn-outline-info mb-4" href="?page=1">Pierwsza</a>
             <a class="btn btn-outline-info mb-4" href="?page={{ drony.previous_page_number }}">Poprzednia</a>
@@ -86,6 +87,7 @@
             <a class="btn btn-outline-info mb-4" href="?page={{ drony.next_page_number}}">Nastepna</a>
             <a class="btn btn-outline-info mb-4" href="?page={{ drony.paginator.num_pages }}">Ostatnia</a>
         {% endif %}
+    {% endif %}
     <!------------------------------------------------------NUMERACJA STRON------------------------------------------------------>
 </div>
 {% endblock %}
