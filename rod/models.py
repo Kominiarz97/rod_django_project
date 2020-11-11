@@ -62,7 +62,6 @@ class Zgloszenia(models.Model):
    godz_zgloszenia = models.TimeField(db_column='Godz_zgloszenia', blank=True, null=True)
    id_drona = models.ForeignKey(Drony, models.DO_NOTHING, db_column='id_drona', blank=True, null=True)
    id_trasy = models.ForeignKey(Trasy, models.DO_NOTHING, db_column='id_trasy', blank=True, null=True)
-   id_odcinka_trasy = models.ForeignKey(PodzialTrasy, models.DO_NOTHING, db_column='id_odcinka_trasy', blank=True, null=True)
    rodzaj_zagrozenia = models.ForeignKey(Zagrozenia, models.DO_NOTHING, db_column='Rodzaj_zagrozenia', blank=True, null=True)
    lokalizacja_gps = models.CharField(db_column='Lokalizacja_gps', max_length=30, blank=True)
    zarejestrowane = models.BooleanField(db_column='Zarejestrowane', default=False, blank=True)
