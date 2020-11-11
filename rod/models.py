@@ -63,10 +63,10 @@ class Zgloszenia(models.Model):
    id_drona = models.ForeignKey(Drony, models.DO_NOTHING, db_column='id_drona', blank=True, null=True)
    id_trasy = models.ForeignKey(Trasy, models.DO_NOTHING, db_column='id_trasy', blank=True, null=True)
    rodzaj_zagrozenia = models.ForeignKey(Zagrozenia, models.DO_NOTHING, db_column='Rodzaj_zagrozenia', blank=True, null=True)
-   lokalizacja_gps = models.CharField(db_column='Lokalizacja_gps', max_length=30, blank=True)
-   zarejestrowane = models.BooleanField(db_column='Zarejestrowane', default=False, blank=True)
+   lokalizacja_gps = models.CharField(db_column='Lokalizacja_gps', max_length=45, blank=True, null=True)
+   zarejestrowane = models.BooleanField(db_column='Zarejestrowane', default=False, blank=True, null=True)
    id_uzytkownika = models.ForeignKey(User, models.CASCADE, db_column='id_uzytkownika', blank=True, null=True)
-   zgloszenie_sluzbom = models.BooleanField(db_column='Zgloszenie_sluzbom', default=False, blank=True)
+   zgloszenie_sluzbom = models.BooleanField(db_column='Zgloszenie_sluzbom', default='false', blank=True, null=True)
 
    class Meta:
       db_table = 'Zgloszenia'
