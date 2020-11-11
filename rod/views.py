@@ -11,8 +11,11 @@ def home(request):
 
 def last_reports(request):
     if request.user.is_authenticated:
-        zgloszenia = Zgloszenia.objects.all()
-        return render(request, 'rod/last_reports.html', {'title' : 'Ostatnie zgłoszenia', 'zgloszenia':zgloszenia})
+        zgloszenia = Zgloszenia.objects.get_queryset().order_by('-id_zgloszenia')
+        paginator = Paginator(zgloszenia, 1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'rod/last_reports.html', {'title' : 'Ostatnie zgłoszenia', 'zgloszenia':page_obj})
     else:
         return redirect('/')
 

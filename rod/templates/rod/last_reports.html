@@ -1,17 +1,73 @@
 {% extends 'rod/base.html' %}
-
-
 {% block content %}
+<div class="container my-5">
+
     {% if zgloszenia %}
-        {% for zgloszenie in zgloszenia %}
-            {% if zgloszenie.zarejestrowane == False %}
-                <h3>Zgloszenie nr {{ zgloszenie.id }}</h3>
-                <p>{{ zgloszenie.data_zgloszenia }} {{ zgloszenie.godz_zgloszenia }}</p>
-                <p>Typ zagrozenia: {{ zgloszenie.rodzaj_zagrozenia }}</p>
-                <p>Trasa: {{ zgloszenie.id_trasy }} </p>
-                <p>Odcinek: {{ zgloszenie.id_odcinka_trasy }}</p>
-                <p> {{ zgloszenie.zdjecie }}</p>
+
+  <!-- Section: Block Content -->
+  <section class="dark-grey-text">
+    <h3 class="text-center font-weight-bold mb-4 pb-2">ZGLOSZENIE NUMER: 17</h3>
+      <p class="text-center  w-responsive mx-auto mb-5">Dokładne współrzędne geograficzne:<strong> 51.170909, 22.502379</strong>
+      <br>
+          Godzina i data:<strong> 11/11/2020 16:54 </strong>
+      </p>
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-lg-5 mb-lg-0 mb-5">
+        <img src="https://mdbootstrap.com/img/Photos/Others/images/83.jpg" class="img-fluid rounded z-depth-1" alt="Sample project image">
+      </div>
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-lg-7">
+        <ul class="list-unstyled fa-ul mb-0">
+          <li class="d-flex justify-content-left pl-4">
+            <div>
+              <h5 class="font-weight-bold mb-3">Trasa:</h5>
+              <p class="text-muted">Lublin_Główny-Stalowa_Wola</p>
+            </div>
+          </li>
+          <li class="d-flex justify-content-left pl-4">
+            <div>
+              <h5 class="font-weight-bold mb-3">Zgłoszenie pochodzi z drona:</h5>
+              <p class="text-muted">Dron DJI Mavic Air 2</p>
+            </div>
+          </li>
+          <li class="d-flex justify-content-center pl-4">
+            <div>
+                <button type="button" class="btn btn-success">ZGLOS ZDARZENIE!</button>
+                <button type="button" class="btn btn-danger">IGNORUJ</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+    <hr class="my-5">
+    <!-------------------------------------------- NUMERACJA ZGLOSZEN -------------------------------------------->
+      <div class="col-lg-8 text-center">
+
+          {% for num in zgloszenia.paginator.page_range%}
+            {% if drony.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > zgloszenia.number|add:'-3' and num < zgloszenia.number|add:'3' %}
+                    <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
             {% endif %}
-        {% endfor %}
+          {% endfor %}
+
+      </div>
+    <!-------------------------------------------- NUMERACJA ZGLOSZEN -------------------------------------------->
+            {% else %}
+            <div class="alert alert-warning" role="alert">
+                <h1>AKTUALNIE NIE MA ŻADNYCH NOWYCH ZGLOSZEN</h1>
+            </div>
     {% endif %}
+
+  </section>
+  <!-- Section: Block Content -->
+
+
+</div>
 {% endblock %}
