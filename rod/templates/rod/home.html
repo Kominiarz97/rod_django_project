@@ -1,2 +1,9 @@
 {% extends 'rod/base.html' %}
-
+{%  load static%}
+{% block content %}
+    <div class="container z-depth-1 p-5 my-5">
+        <div class="col-lg-5 mb-lg-0 mb-5">
+            <img src="{% static 'MEDIA/logo.jpeg' %}" class="img-fluid rounded z-depth-1" alt="Sample project image">
+        </div>
+    </div>
+{% endblock %}
