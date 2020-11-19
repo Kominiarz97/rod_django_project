@@ -9,6 +9,7 @@ class Drony(models.Model):
    pojemnosc_akumulatora = models.IntegerField(db_column='Pojemnosc_akumulatora')
    predkosc_przelotowa = models.IntegerField(db_column='Predkosc_przelotowa')
    oswietlenie = models.BooleanField(db_column='Oswietlenie')
+   udzwig = models.IntegerField(db_column='Udzwig drona')
    class Meta:
        db_table = 'Drony'
 
@@ -18,13 +19,10 @@ class PodzialTrasy(models.Model):
    poczatek_odcinka = models.CharField(db_column='Poczatek_odcinka', max_length=30)
    koniec_odcinka = models.CharField(db_column='Koniec_odcinka', max_length=30)
    typ_otoczenia = models.ForeignKey('TypyOtoczenia', models.DO_NOTHING, db_column='Typ_otoczenia')
-   poziom_zagrozenia = models.IntegerField(db_column='Poziom_zagrozenia')
    trasa = models.ForeignKey('Trasy', models.DO_NOTHING, db_column='Trasa')
 
    class Meta:
        db_table = 'Podzial_trasy'
-
-
 
 
 class Trasy(models.Model):
@@ -60,12 +58,14 @@ class Zgloszenia(models.Model):
    zdjecie = models.BinaryField(db_column="Zdjecie",blank=True)
    data_zgloszenia = models.DateField(db_column='Data_zgloszenia', blank=True, null=True)
    godz_zgloszenia = models.TimeField(db_column='Godz_zgloszenia', blank=True, null=True)
-   id_drona = models.ForeignKey(Drony, models.DO_NOTHING, db_column='id_drona', blank=True, null=True)
-   id_trasy = models.ForeignKey(Trasy, models.DO_NOTHING, db_column='id_trasy', blank=True, null=True)
+   dron = models.ForeignKey(Drony, models.DO_NOTHING, db_column='Dron', blank=True, null=True)
+   trasa = models.ForeignKey(Trasy, models.DO_NOTHING, db_column='Trasa', blank=True, null=True)
+   odcinek = models.ForeignKey(TypyOtoczenia, models.DO_NOTHING, db_column='Odcinek', blank=True, null=True)
    rodzaj_zagrozenia = models.ForeignKey(Zagrozenia, models.DO_NOTHING, db_column='Rodzaj_zagrozenia', blank=True, null=True)
+   typ_otoczenia = models.ForeignKey(TypyOtoczenia, models.DO_NOTHING, db_column='Typ_zagrozenia', blank=True, null=True)
    lokalizacja_gps = models.CharField(db_column='Lokalizacja_gps', max_length=45, blank=True, null=True)
    zarejestrowane = models.BooleanField(db_column='Zarejestrowane', default=False, blank=True, null=True)
-   id_uzytkownika = models.ForeignKey(User, models.CASCADE, db_column='id_uzytkownika', blank=True, null=True)
+   uzytkownik = models.ForeignKey(User, models.CASCADE, db_column='Uzytkownik', blank=True, null=True)
    zgloszenie_sluzbom = models.BooleanField(db_column='Zgloszenie_sluzbom', default='false', blank=True, null=True)
 
    class Meta:
