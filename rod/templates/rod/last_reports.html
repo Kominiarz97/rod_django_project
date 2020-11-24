@@ -58,9 +58,9 @@
 
           {% for num in zgloszenia.paginator.page_range%}
             {% if drony.number == num %}
-                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                <a class="btn btn-primary mb-4" href="?page={{ num }}">{{ num }}</a>
                 {% elif num > zgloszenia.number|add:'-3' and num < zgloszenia.number|add:'3' %}
-                    <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                    <a class="btn btn-outline-primary mb-4" href="?page={{ num }}">{{ num }}</a>
             {% endif %}
           {% endfor %}
 
