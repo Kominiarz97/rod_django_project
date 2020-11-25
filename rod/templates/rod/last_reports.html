@@ -16,11 +16,9 @@
                 <br>
                 Godzina: <strong> {{ zgloszenie.godz_zgloszenia|date:'H:i' }} </strong>Data: <strong>{{ zgloszenie.data_zgloszenia|date:'d/m/Y'}}</strong>
             </p>
-        <!-- Grid row -->
             <div class="row">
-            <!-- Grid column -->
-                <div class="col-lg-5 mb-lg-0 mb-5">
-                    <img src ="{{ zgloszenie.zdjecie }}" alt="Sample project image">
+                <div class="col-lg-5 mb-lg-0 mb-8">
+                    <img src = "data: image / png; base64, {{zgloszenie.zdjecie}}" height="400" width="300">
                 </div>
 
             <div class="col-lg-7">
