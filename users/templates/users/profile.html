@@ -1,0 +1,28 @@
+{% extends "rod/base.html" %}
+{% block content %}
+
+    <div class="container my-5 py-5 z-depth-1">
+            <div class="alert alert-warning text-center" role="alert">
+            <h1>DANE UŻYTKOWNIKA</h1>
+            </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    {% for form in u_form %}
+                            <div class="form-group mb-4">
+                                <label> {{ form.label}}: </label>
+                                <div class="form-control">
+                                    {{form}}
+                                </div>
+                            </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary">Aktualizuj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

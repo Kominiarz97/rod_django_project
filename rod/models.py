@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 
-
 class Drony(models.Model):
    id_drona = models.AutoField(primary_key=True)
    nazwa = models.CharField(db_column='Nazwa', max_length=30)
@@ -69,5 +68,6 @@ class Zgloszenia(models.Model):
 
    class Meta:
       db_table = 'Zgloszenia'
+
 
 
