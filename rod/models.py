@@ -13,17 +13,6 @@ class Drony(models.Model):
        db_table = 'Drony'
 
 
-class PodzialTrasy(models.Model):
-   id_odcnika = models.AutoField(primary_key=True)
-   poczatek_odcinka = models.CharField(db_column='Poczatek_odcinka', max_length=30)
-   koniec_odcinka = models.CharField(db_column='Koniec_odcinka', max_length=30)
-   typ_otoczenia = models.ForeignKey('TypyOtoczenia', models.DO_NOTHING, db_column='Typ_otoczenia')
-   trasa = models.ForeignKey('Trasy', models.DO_NOTHING, db_column='Trasa')
-
-   class Meta:
-       db_table = 'Podzial_trasy'
-
-
 class Trasy(models.Model):
    id_trasy = models.AutoField(primary_key=True)
    stacja_poczatek = models.CharField(db_column='Stacja_poczatek', max_length=30)
@@ -35,21 +24,12 @@ class Trasy(models.Model):
        db_table = 'Trasy'
 
 
-class TypyOtoczenia(models.Model):
-   id_otoczenia = models.AutoField(primary_key=True)
-   typ = models.CharField(db_column='Typ', max_length=30)
-
-   class Meta:
-       db_table = 'Typy_otoczenia'
-
-
 class Zagrozenia(models.Model):
    id_zagrozenia = models.AutoField(primary_key=True)
    typ = models.CharField(db_column='Typ', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
    class Meta:
        db_table = 'Zagrozenia'
-
 
 
 class Zgloszenia(models.Model):
@@ -59,7 +39,6 @@ class Zgloszenia(models.Model):
    godz_zgloszenia = models.TimeField(db_column='Godz_zgloszenia', blank=True, null=True)
    dron = models.ForeignKey(Drony, models.DO_NOTHING, db_column='Dron', blank=True, null=True)
    trasa = models.ForeignKey(Trasy, models.DO_NOTHING, db_column='Trasa', blank=True, null=True)
-   odcinek = models.ForeignKey(TypyOtoczenia, models.DO_NOTHING, db_column='Odcinek', blank=True, null=True)
    rodzaj_zagrozenia = models.ForeignKey(Zagrozenia, models.DO_NOTHING, db_column='Rodzaj_zagrozenia', blank=True, null=True)
    lokalizacja_gps = models.CharField(db_column='Lokalizacja_gps', max_length=45, blank=True, null=True)
    zarejestrowane = models.BooleanField(db_column='Zarejestrowane', default=False, blank=True, null=True)

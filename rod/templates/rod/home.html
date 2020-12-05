@@ -1,9 +1,38 @@
 {% extends 'rod/base.html' %}
 {%  load static%}
 {% block content %}
-    <div class="container z-depth-1 p-5 my-5">
-        <div class="col-lg-5 mb-lg-0 mb-5">
-            <img src="{% static 'MEDIA/logo.jpeg' %}" class="img-fluid rounded z-depth-1" alt="Logo politechniki">
+
+<div class="container my-5 p-5 z-depth-1">
+  <section class="dark-grey-text">
+    <h2 class="text-center font-weight-bold mb-4 pb-2">Projekt i wykonanie prostego oprogramowania wykrywającego
+        zagrożenie na torach kolejowych na podstawie analizy obrazu</h2>
+    <p class="text-center lead grey-text mx-auto mb-5">Celem pracy było zaprojektowanie i implementacja algorytmu wykrywającego
+        przeszkody na torach kolejowych, oraz aplikacji webowej. </p>
+    <div class="row">
+      <div class="col-lg-3 text-center text-lg-left">
+        <img class="img-fluid" src="{% static 'MEDIA/logo.jpeg' %}" alt="Sample image">
+      </div>
+      <div class="col-lg-7">
+        <div class="row mb-3">
+          <div class="col-1">
+          </div>
+          <div class="col-xl-10 col-md-11 col-10">
+            <h5 class="font-weight-bold mb-3">Dyplomanci:</h5>
+            <p class="grey-text">Maciej Krawiec (Maciej.krawiec@pollub.edu.pl) <br>
+              Patryk Koryga (Patryk.koryga@pollub.edu.pl)</p>
+          </div>
         </div>
+        <div class="row mb-3">
+          <div class="col-1">
+          </div>
+          <div class="col-xl-10 col-md-11 col-10">
+            <h5 class="font-weight-bold mb-3">Promotor</h5>
+            <p class="grey-text">dr inż. Tomasz Szymczyk</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
+</div>
+
 {% endblock %}

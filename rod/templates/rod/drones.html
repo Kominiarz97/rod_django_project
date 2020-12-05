@@ -30,7 +30,9 @@
                                 <th class="font-weight-bold">
                                   <strong>Oświetlenie:</strong>
                                 </th>
-                                <th></th>
+                                <th class="font-weight-bold">
+                                    <strong>Udźwig</strong>
+                                </th>
                               </tr>
                             </thead>
                   <!---------------------NAGLOWKI--------------------->
@@ -47,12 +49,15 @@
                         <td>{{ dron.pojemnosc_akumulatora }} mAh</td>
                         <td></td>
                         <td>{{dron.predkosc_przelotowa}}  km/h</td>
-                        <td class="text-center text-md-left">
+                        <td>
                             {% if dron.oswietlenie is True %}
-                                <span class="qty">Tak </span>
+                                <p>Tak</p>
                                 {% else %}
-                                    <span class="qty">Nie</span>
+                                    <p>Nie</p>
                             {% endif %}
+                        </td>
+                        <td>
+                            {{ dron.udzwig }} gram
                         </td>
 
                         </tr>

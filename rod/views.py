@@ -65,6 +65,7 @@ def noninterv_archive(request):
         return render(request,'rod/noninterv_archive.html',{'title':'Zgłoszenia wymagające interwencji'})
     else:
         return redirect('/')
+
 def new_drone(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -73,6 +74,7 @@ def new_drone(request):
                 dron.nazwa = request.POST.get('name')
                 dron.pojemnosc_akumulatora = int(request.POST.get('capacity'))
                 dron.predkosc_przelotowa = int(request.POST.get('speed'))
+                dron.udzwig = request.POST.get('weight')
                 dron.oswietlenie = request.POST.get('lighting')
                 dron.save()
         return render(request, 'rod/new_drone.html', {'title': 'Drony_nowe'})

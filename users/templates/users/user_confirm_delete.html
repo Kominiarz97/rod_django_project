@@ -1,0 +1,16 @@
+{% extends "rod/base.html" %}
+
+{% block content %}
+       <div class="content-section">
+       <form action = "{% url 'user-delete' user.id %}" method="POST">
+            {% csrf_token %}
+           <fieldset class="form-group">
+               <h2>Czy napewno chcesz usunąć konto {{ user.first_name }} {{ user.last_name }} {{ user.id }}? </h2>
+           </fieldset>
+           <div class="form-group">
+               <button class="btn btn-outline-danger" type="submit">Tak, usuń</button>
+               <input class="btn btn-primary" type="button" value="Powrót do listy"  onclick="location.href='{% url 'users-profile' %}'"/>
+           </div>
+       </form>
+   </div>
+{% endblock %}

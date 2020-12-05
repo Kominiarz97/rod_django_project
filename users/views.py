@@ -3,6 +3,7 @@ from django.contrib.auth.models import  User,auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm
+from django.views.generic import DeleteView
 
 def login(request):
     if request.user.is_authenticated:
@@ -69,3 +70,20 @@ def profile(request):
         'u_form': u_form,
     }
     return render(request, 'users/profile.html', context)
+
+def del_user(request, pk):
+    if request.method == "POST":
+        try:
+            u = User.objects.get(id = pk)
+            u.delete()
+            messages.success(request, "Konto usunięte")
+            return redirect('/')
+
+        except User.DoesNotExist:
+            messages.error(request, "Nie ma takiego użytkownika")
+            return redirect('/')
+
+        except Exception as e:
+            return render(request, 'users/profile.html',{'err':e.message})
+
+    return render(request, 'users/user_confirm_delete.html')
