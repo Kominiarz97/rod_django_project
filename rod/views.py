@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import  User, auth
 from .models import *
 from django.core.paginator import Paginator
+from .forms import DronUpdateForm
 from base64 import b64encode
 
 def home(request):
@@ -23,7 +24,7 @@ def last_reports(request):
     else:
         return redirect('/')
 
-
+##-----------------------------------------------------------------------------DRONY-------------------------------------------------------------
 def drones(request):
     if request.user.is_authenticated:
         drony = Drony.objects.get_queryset().order_by('-id_drona')
@@ -35,6 +36,42 @@ def drones(request):
     else:
         return redirect('/')
 
+def new_drone(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST.get('name'):
+                dron = Drony()
+                dron.nazwa = request.POST.get('name')
+                dron.pojemnosc_akumulatora = int(request.POST.get('capacity'))
+                dron.predkosc_przelotowa = int(request.POST.get('speed'))
+                dron.udzwig = request.POST.get('weight')
+                dron.oswietlenie = request.POST.get('lighting')
+                dron.save()
+        return render(request, 'rod/new_drone.html', {'title': 'Drony_nowe'})
+
+
+
+def updateDron(request, pk):
+    dron = Drony.objects.get(id_drona = pk)
+    form = DronUpdateForm(instance = dron)
+
+    if request.method == 'POST':
+        form = DronUpdateForm(request.POST, instance=dron)
+        if form.is_valid():
+            form.save()
+            return redirect('/drones')
+    context = {'form':form}
+    return render(request, 'rod/dron_update.html', context)
+
+def delDron(request,pk):
+    dron = Drony.objects.get(id_drona = pk)
+    if request.method == "POST":
+            dron.delete()
+            return redirect('/')
+    context = {'dron':dron}
+    return render(request, 'rod/dron_confirm_delete.html', context)
+
+##-----------------------------------------------------------------------------DRONY-------------------------------------------------------------
 def map(request):
     if request.user.is_authenticated:
         zgloszenia = Zgloszenia.objects.all()
@@ -66,17 +103,5 @@ def noninterv_archive(request):
     else:
         return redirect('/')
 
-def new_drone(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            if request.POST.get('name'):
-                dron = Drony()
-                dron.nazwa = request.POST.get('name')
-                dron.pojemnosc_akumulatora = int(request.POST.get('capacity'))
-                dron.predkosc_przelotowa = int(request.POST.get('speed'))
-                dron.udzwig = request.POST.get('weight')
-                dron.oswietlenie = request.POST.get('lighting')
-                dron.save()
-        return render(request, 'rod/new_drone.html', {'title': 'Drony_nowe'})
 
 

@@ -3,7 +3,7 @@
 
     <div class="container my-5 py-5 z-depth-1">
             <div class="alert alert-warning text-center" role="alert">
-            <h1>DANE UŻYTKOWNIKA</h1>
+            <h1>DANE UŻYTKOWNIKA </h1>
             </div>
         <div class="row d-flex justify-content-center">
             <div class="col-md-6">
@@ -20,8 +20,8 @@
                     {% endfor %}
 
                     <button type="submit" class="btn btn-primary">Aktualizuj</button>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1 p-2" href="{% url 'user-delete' user.id %}">Usuń konto</a>
                 </form>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'user-delete' user.id %}">Usuń konto</a>
             </div>
         </div>
     </div>
