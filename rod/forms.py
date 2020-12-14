@@ -6,3 +6,5 @@ class DronUpdateForm(forms.ModelForm):
         model = Drony
         fields = '__all__'
 
+
+

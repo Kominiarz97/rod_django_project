@@ -37,8 +37,8 @@
                 </li>
               <li class="d-flex justify-content-center pl-4">
                 <div>
-                    <button type="button" class="btn btn-success">ZGLOS ZDARZENIE!</button>
-                    <button type="button" class="btn btn-danger">IGNORUJ</button>
+                    <a class="btn btn-sm btn-primary" href="{% url 'rod-report-submit' zgloszenie.id_zgloszenia %}">Zgłoś zdarzenie</a>
+                    <a class="btn btn-sm btn-primary" href="{% url 'rod-report-ignore' zgloszenie.id_zgloszenia %}">Ignoruj zdarzenie</a>
                 </div>
               </li>
             </ul>
