@@ -11,7 +11,6 @@ urlpatterns = [
     path('drones/update/<str:pk>', views.updateDron, name='rod-update_dron'),
     path('drones/delete/<str:pk>', views.delDron, name='rod-delete_dron'),
     path('map/', views.map, name='rod-map'),
-    path('shedule/', views.shedule, name='rod-shedule'),
     path('all-archive/', views.all_archive, name='rod-all-archive'),
     path('interv-archive/', views.interv_archive, name='rod-interv-archive'),
     path('noninterv-archive/', views.noninterv_archive, name='rod-noninterv-archive'),

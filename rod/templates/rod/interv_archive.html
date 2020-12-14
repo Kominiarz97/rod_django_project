@@ -1,1 +1,70 @@
 {% extends 'rod/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+
+    {% if not zgloszenia  %}
+        <div class="alert alert-warning text-center" role="alert">
+            <h1>BRAK ZGŁOSZEŃ W BAZIE DANYCH</h1>
+        </div>
+    {% endif %}
+    {% if zgloszenia %}
+        {% for zgloszenie in zgloszenia %}
+      <!-- Section: Block Content -->
+        <section class="dark-grey-text">
+            <h3 class="text-center font-weight-bold mb-4 pb-2">ZGLOSZENIE NUMER: {{  zgloszenie.id_zgloszenia }}</h3>
+            <p class="text-center  w-responsive mx-auto mb-5">Dokładne współrzędne geograficzne:<strong> {{ zgloszenie.lokalizacja_gps}}</strong>
+                <br>
+                Godzina: <strong> {{ zgloszenie.godz_zgloszenia|date:'H:i' }} </strong>Data: <strong>{{ zgloszenie.data_zgloszenia|date:'d/m/Y'}}</strong>
+            </p>
+            <div class="row">
+                <div class="col-lg-5 mb-lg-0 mb-8">
+                    <img src = "data: image / png; base64, {{zgloszenie.zdjecie}}" height="400" width="300">
+                </div>
+
+            <div class="col-lg-7">
+                <ul class="list-unstyled fa-ul mb-0">
+                <li class="d-flex justify-content-left pl-4">
+                    <div>
+                        <h5 class="font-weight-bold mb-3">Trasa:</h5>
+                        <p class="text-muted">{{zgloszenie.trasa.nazwa_trasy}}</p>
+                    </div>
+                        </li>
+                        <li class="d-flex justify-content-left pl-4">
+                    <div>
+                    <h5 class="font-weight-bold mb-3">Zgłoszenie pochodzi z drona:</h5>
+                    <p class="text-muted">{{ zgloszenie.dron.nazwa}}</p>
+                    </div>
+                </li>
+              <li class="d-flex justify-content-center pl-4">
+              </li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+
+
+        </div>
+        <!-- Grid row -->
+        <hr class="my-5">
+        {% endfor %}
+      {% endif %}
+    <!-------------------------------------------- NUMERACJA ZGLOSZEN -------------------------------------------->
+    <div class="col-lg-8 text-center">
+
+          {% for num in zgloszenia.paginator.page_range%}
+            {% if drony.number == num %}
+                <a class="btn btn-primary mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > zgloszenia.number|add:'-3' and num < zgloszenia.number|add:'3' %}
+                    <a class="btn btn-outline-primary mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+          {% endfor %}
+
+      </div>
+    <!-------------------------------------------- NUMERACJA ZGLOSZEN -------------------------------------------->
+
+  </section>
+  <!-- Section: Block Content -->
+
+
+</div>
+{% endblock %}
