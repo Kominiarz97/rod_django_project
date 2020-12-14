@@ -35,6 +35,12 @@
                     <h5 class="font-weight-bold mb-3">Zgłoszenie pochodzi z drona:</h5>
                     <p class="text-muted">{{ zgloszenie.dron.nazwa}}</p>
                     </div>
+                            </li>
+                    <li class="d-flex justify-content-left pl-4">
+                    <div>
+                        <h5 class="font-weight-bold mb-3">Zgłoszenie zarejestrowane przez:</h5>
+                        <p class="text-muted">{{ zgloszenie.uzytkownik.first_name}} {{ zgloszenie.uzytkownik.last_name}}</p>
+                    </div>
                 </li>
               <li class="d-flex justify-content-center pl-4">
               </li>
