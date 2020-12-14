@@ -11,19 +11,6 @@ def home(request):
     else:
         return redirect('/')
 
-def last_reports(request):
-    if request.user.is_authenticated:
-        zgloszenia = Zgloszenia.objects.get_queryset().order_by('-id_zgloszenia')
-        for row in zgloszenia:
-            row.zdjecie = b64encode(row.zdjecie).decode('ascii')
-
-        paginator = Paginator(zgloszenia, 1)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'rod/last_reports.html', {'title' : 'Ostatnie zgłoszenia', 'zgloszenia':page_obj})
-    else:
-        return redirect('/')
-
 ##-----------------------------------------------------------------------------DRONY-------------------------------------------------------------
 def drones(request):
     if request.user.is_authenticated:
@@ -32,7 +19,6 @@ def drones(request):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, 'rod/drones.html', {'title': 'Drony', 'drony': page_obj})
-
     else:
         return redirect('/')
 
@@ -48,30 +34,38 @@ def new_drone(request):
                 dron.oswietlenie = request.POST.get('lighting')
                 dron.save()
         return render(request, 'rod/new_drone.html', {'title': 'Drony_nowe'})
-
+    else:
+        return redirect('/')
 
 
 def updateDron(request, pk):
-    dron = Drony.objects.get(id_drona = pk)
-    form = DronUpdateForm(instance = dron)
+    if request.user.is_authenticated:
+        dron = Drony.objects.get(id_drona = pk)
+        form = DronUpdateForm(instance = dron)
 
-    if request.method == 'POST':
-        form = DronUpdateForm(request.POST, instance=dron)
-        if form.is_valid():
-            form.save()
-            return redirect('/drones')
-    context = {'form':form}
-    return render(request, 'rod/dron_update.html', context)
+        if request.method == 'POST':
+            form = DronUpdateForm(request.POST, instance=dron)
+            if form.is_valid():
+                form.save()
+                return redirect('/drones')
+        context = {'form':form}
+        return render(request, 'rod/dron_update.html', context)
+    else:
+        return redirect('/')
 
 def delDron(request,pk):
-    dron = Drony.objects.get(id_drona = pk)
-    if request.method == "POST":
-            dron.delete()
-            return redirect('/')
-    context = {'dron':dron}
-    return render(request, 'rod/dron_confirm_delete.html', context)
+    if request.user.is_authenticated:
+        dron = Drony.objects.get(id_drona = pk)
+        if request.method == "POST":
+                dron.delete()
+                return redirect('/')
+        context = {'dron':dron}
+        return render(request, 'rod/dron_confirm_delete.html', context)
+    else:
+        return redirect('/')
 
 ##-----------------------------------------------------------------------------DRONY-------------------------------------------------------------
+
 def map(request):
     if request.user.is_authenticated:
         zgloszenia = Zgloszenia.objects.all()
@@ -79,29 +73,60 @@ def map(request):
     else:
         return redirect('/')
 
-def shedule(request):
+##-----------------------------------------------------------------------------ZGLOSZENIA-------------------------------------------------------------
+
+def last_reports(request):
     if request.user.is_authenticated:
-        return render(request,'rod/shedule.html',{'title':'Rozkład jazdy'})
+        zgloszenia = Zgloszenia.objects.filter(zarejestrowane=False).order_by('-id_zgloszenia')
+        for row in zgloszenia:
+            row.zdjecie = b64encode(row.zdjecie).decode('ascii')
+
+        paginator = Paginator(zgloszenia, 1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'rod/last_reports.html', {'title' : 'Ostatnie zgłoszenia', 'zgloszenia':page_obj})
     else:
         return redirect('/')
 
 def all_archive(request):
     if request.user.is_authenticated:
-        return render(request,'rod/all_archive.html',{'tittle':'Wszystkie zgłoszenia'})
+        zgloszenia = Zgloszenia.objects.get_queryset().order_by('-id_zgloszenia')
+        for row in zgloszenia:
+            row.zdjecie = b64encode(row.zdjecie).decode('ascii')
+        paginator = Paginator(zgloszenia, 1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request,'rod/all_archive.html',{'tittle':'Wszystkie zgłoszenia', 'zgloszenia':page_obj})
     else:
         return redirect('/')
 
 def interv_archive(request):
     if request.user.is_authenticated:
-        return render(request, 'rod/interv_archive.html',{'title':'Zgłoszenia niewymagające interwencji'})
+        zgloszenia = Zgloszenia.objects.filter(zgloszenie_sluzbom=True, zarejestrowane=True).order_by('-id_zgloszenia')
+        for row in zgloszenia:
+            row.zdjecie = b64encode(row.zdjecie).decode('ascii')
+        paginator = Paginator(zgloszenia, 1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'rod/interv_archive.html',{'title':'Zgłoszenia wymagające interwencji', 'zgloszenia':page_obj})
     else:
         return redirect('/')
 
 def noninterv_archive(request):
     if request.user.is_authenticated:
-        return render(request,'rod/noninterv_archive.html',{'title':'Zgłoszenia wymagające interwencji'})
+        zgloszenia = Zgloszenia.objects.filter(zgloszenie_sluzbom=False, zarejestrowane=True).order_by('-id_zgloszenia')
+        for row in zgloszenia:
+            row.zdjecie = b64encode(row.zdjecie).decode('ascii')
+        paginator = Paginator(zgloszenia, 1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+
+        return render(request,'rod/noninterv_archive.html',{'title':'Zgłoszenia niewymagające interwencji','zgloszenia':page_obj})
     else:
         return redirect('/')
-
+##-----------------------------------------------------------------------------ZGLOSZENIA-------------------------------------------------------------
 
 
