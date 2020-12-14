@@ -35,7 +35,22 @@
                     <h5 class="font-weight-bold mb-3">Zgłoszenie pochodzi z drona:</h5>
                     <p class="text-muted">{{ zgloszenie.dron.nazwa}}</p>
                     </div>
-                </li>
+                        </li>
+                    <li class="d-flex justify-content-left pl-4">
+                    <div>
+                        {% if zgloszenie.zgloszenie_sluzbom %}
+                            <h5 class="font-weight-bold mb-3">Zgłoszone służbom</h5>
+                        {% else %}
+                            <h5 class="font-weight-bold mb-3">Zignorowane</h5>
+                        {% endif %}
+                    </div>
+                    </li>
+                    <li class="d-flex justify-content-left pl-4">
+                    <div>
+                        <h5 class="font-weight-bold mb-3">Zgłoszenie zarejestrowane przez:</h5>
+                        <p class="text-muted">{{ zgloszenie.uzytkownik.first_name}} {{ zgloszenie.uzytkownik.last_name}}</p>
+                    </div>
+                    </li>
               <li class="d-flex justify-content-center pl-4">
               </li>
             </ul>

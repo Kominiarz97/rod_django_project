@@ -46,10 +46,12 @@ def report_ignore(request, pk):
         zgloszenie = Zgloszenia.objects.get(id_zgloszenia=pk)
         if request.method == 'POST':
             zgloszenie.zarejestrowane = True
-            zgloszenie.uzytkownik.id = request.user.id
+            zgloszenie.uzytkownik_id = request.user.id
             zgloszenie.zgloszenie_sluzbom = False
+            zgloszenie.save()
             return redirect('/last-reports')
-        return render(request, 'rod/report_ignore.html', {'zgloszenie':zgloszenie})
+        return render(request, 'rod/report_ignore.html', {'zgloszenie': zgloszenie})
+
     else:
         return redirect('/')
 
@@ -119,7 +121,7 @@ def map(request):
 
 def all_archive(request):
     if request.user.is_authenticated:
-        zgloszenia = Zgloszenia.objects.get_queryset().order_by('-id_zgloszenia')
+        zgloszenia = Zgloszenia.objects.filter(zarejestrowane=True).order_by('-id_zgloszenia')
         for row in zgloszenia:
             row.zdjecie = b64encode(row.zdjecie).decode('ascii')
         paginator = Paginator(zgloszenia, 1)
