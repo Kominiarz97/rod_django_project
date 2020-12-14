@@ -14,14 +14,14 @@ def home(request):
 
 def last_reports(request):
     if request.user.is_authenticated:
-        zgloszenia = Zgloszenia.objects.get_queryset().order_by('-id_zgloszenia')
+        zgloszenia = Zgloszenia.objects.filter(zarejestrowane=False).order_by('-id_zgloszenia')
         for row in zgloszenia:
             row.zdjecie = b64encode(row.zdjecie).decode('ascii')
 
         paginator = Paginator(zgloszenia, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        return render(request, 'rod/last_reports.html', {'title': 'Ostatnie zgłoszenia', 'zgloszenia': page_obj})
+        return render(request, 'rod/last_reports.html', {'title' : 'Ostatnie zgłoszenia', 'zgloszenia':page_obj})
     else:
         return redirect('/')
 
@@ -30,11 +30,12 @@ def report_submit(request, pk):
     if request.user.is_authenticated:
         zgloszenie = Zgloszenia.objects.get(id_zgloszenia=pk)
         if request.method == 'POST':
-            zgloszenie.zarejestrowane = "true"
-            zgloszenie.uzytkownik = request.user.id
-            zgloszenie.zgloszenie_sluzbom = "true"
-            return redirect('/last_reports')
-        return render(request, 'rod/report_submit.html', {'title': 'Przekaż zgłoszenie'})
+            zgloszenie.zarejestrowane = True
+            zgloszenie.uzytkownik_id = request.user.id
+            zgloszenie.zgloszenie_sluzbom = True
+            zgloszenie.save()
+            return redirect('/last-reports')
+        return render(request, 'rod/report_submit.html', {'zgloszenie':zgloszenie})
 
     else:
         return redirect('/')
@@ -44,11 +45,11 @@ def report_ignore(request, pk):
     if request.user.is_authenticated:
         zgloszenie = Zgloszenia.objects.get(id_zgloszenia=pk)
         if request.method == 'POST':
-            zgloszenie.zarejestrowane = "true"
-            zgloszenie.uzytkownik = request.user.id
-            zgloszenie.zgloszenie_sluzbom = "false"
-            return redirect('/last_reports')
-        return render(request, 'rod/report_ignore.html', {'title': 'Ignoruj zgłoszenie'})
+            zgloszenie.zarejestrowane = True
+            zgloszenie.uzytkownik.id = request.user.id
+            zgloszenie.zgloszenie_sluzbom = False
+            return redirect('/last-reports')
+        return render(request, 'rod/report_ignore.html', {'zgloszenie':zgloszenie})
     else:
         return redirect('/')
 
@@ -114,18 +115,7 @@ def map(request):
     else:
         return redirect('/')
 
-def shedule(request):
-    if request.user.is_authenticated:
-        zgloszenia = Zgloszenia.objects.filter(zarejestrowane=False).order_by('-id_zgloszenia')
-        for row in zgloszenia:
-            row.zdjecie = b64encode(row.zdjecie).decode('ascii')
 
-        paginator = Paginator(zgloszenia, 1)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'rod/last_reports.html', {'title' : 'Ostatnie zgłoszenia', 'zgloszenia':page_obj})
-    else:
-        return redirect('/')
 
 def all_archive(request):
     if request.user.is_authenticated:
