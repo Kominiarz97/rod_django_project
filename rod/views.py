@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import  User, auth
 from .models import *
 from django.core.paginator import Paginator
-from .forms import DronUpdateForm
+from .forms import DronUpdateForm, RouteUpdateForm
 from base64 import b64encode
 
 def home(request):
@@ -60,13 +60,38 @@ def report_ignore(request, pk):
 def drones(request):
     if request.user.is_authenticated:
         drony = Drony.objects.get_queryset().order_by('-id_drona')
-        paginator = Paginator(drony, 3)
+        paginator = Paginator(drony, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, 'rod/drones.html', {'title': 'Drony', 'drony': page_obj})
 
     else:
         return redirect('/')
+
+def routes(request):
+    if request.user.is_authenticated:
+        trasy = Trasy.objects.get_queryset().order_by('id_trasy')
+        paginator = Paginator(trasy, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'rod/routes.html',{'trasy':page_obj})
+    else:
+        return redirect('/')
+
+def new_route(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST.get('name'):
+                trasa = Trasy()
+                trasa.nazwa_trasy = request.POST.get('name')
+                trasa.stacja_poczatek = request.POST.get('first')
+                trasa.stacja_koniec = request.POST.get('last')
+                trasa.dlugosc_trasy = request.POST.get('length')
+                trasa.save()
+        return render(request, 'rod/new_route.html')
+
+
 
 def new_drone(request):
     if request.user.is_authenticated:
@@ -81,6 +106,20 @@ def new_drone(request):
                 dron.save()
         return render(request, 'rod/new_drone.html', {'title': 'Drony_nowe'})
 
+def update_Route(request, pk):
+    if request.user.is_authenticated:
+        trasa = Trasy.objects.get(id_trasy = pk)
+        form = RouteUpdateForm(instance = trasa)
+
+        if request.method == 'POST':
+            form = RouteUpdateForm(request.POST, instance=trasa)
+            if form.is_valid():
+                form.save()
+                return redirect('/routes')
+        context = {'form':form}
+        return render(request, 'rod/route_update.html', context)
+    else:
+        return redirect('/')
 
 
 def updateDron(request, pk):
@@ -97,6 +136,15 @@ def updateDron(request, pk):
         return render(request, 'rod/dron_update.html', context)
     else:
         return redirect('/')
+
+def delRoute(request, pk):
+    if request.user.is_authenticated:
+        trasa = Trasy.objects.get(id_trasy = pk)
+        if request.method == 'POST':
+            trasa.delete()
+            return redirect('/')
+        context = {'trasa': trasa}
+        return render(request, 'rod/route_confirm_delete.html', context)
 
 def delDron(request,pk):
     if request.user.is_authenticated:

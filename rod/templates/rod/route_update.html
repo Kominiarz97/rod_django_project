@@ -1,0 +1,17 @@
+{% extends 'rod/base.html' %}
+{% block content %}
+<br>
+    <div class="container my-5 py-5 z-depth-1">
+        <h3><strong>EDYCJA TRASY</strong> </h3>
+        <hr>
+        <form method="POST">
+             {% csrf_token %}
+             {{ form.as_ul }}
+                <br>
+              <button type="submit" class="btn btn-primary">Aktualizuj</button>
+              <button type="reset" class="btn btn-dark">Reset</button>
+              <input class="btn btn-primary" type="button" value="Powrót do listy tras"  onclick="location.href='{% url 'rod-routes' %}'"/>
+        </form>
+    </div>
+    <br>
+{% endblock %}

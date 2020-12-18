@@ -1,0 +1,37 @@
+{% extends 'rod/base.html' %}
+{% block content %}
+<br>
+    <div class="container my-5 py-5 z-depth-1">
+        <h3><strong>DODAWANIE NOWEJ TRASY DO BAZY</strong> </h3>
+        <hr>
+        <form method="POST">
+             {% csrf_token %}
+              <div class="form-group col-lg-2">
+                  <label for="name"> <strong>Nazwa trasy:</strong>
+                <input type="text" class="form-control" name="name" required>
+                </label>
+              </div>
+              <div class="form-group col-lg-3">
+                  <label for="first"><strong>Stacja początkowa:</strong>
+                    <input type="text" class="form-control" name="first" required>
+                </label>
+              </div>
+              <div class="form-group col-lg-3">
+                  <label for="last"> <strong>Stacja końcowa:</strong>
+                <input type="text" class="form-control" name="last" required>
+                </label>
+              </div>
+                <div class="form-group col-lg-3">
+                  <label for="length"> <strong>Długość trasy:</strong>
+                <input type="text" class="form-control" name="length" placeholder="Podaj w km" required>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Dodaj</button>
+              <button type="reset" class="btn btn-dark">Reset</button>
+              <input class="btn btn-primary" type="button" value="Powrót do listy tras"  onclick="location.href='{% url 'rod-routes' %}'"/>
+
+        </form>
+    </div>
+    <br>
+{% endblock %}
