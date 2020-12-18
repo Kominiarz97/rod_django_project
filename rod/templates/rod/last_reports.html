@@ -9,7 +9,6 @@
     {% endif %}
     {% if zgloszenia %}
         {% for zgloszenie in zgloszenia %}
-      <!-- Section: Block Content -->
         <section class="dark-grey-text">
             <h3 class="text-center font-weight-bold mb-4 pb-2">ZGLOSZENIE NUMER: {{  zgloszenie.id_zgloszenia }}</h3>
             <p class="text-center  w-responsive mx-auto mb-5">Dokładne współrzędne geograficzne:<strong> {{ zgloszenie.lokalizacja_gps}}</strong>
@@ -43,11 +42,7 @@
               </li>
             </ul>
           </div>
-          <!-- Grid column -->
-
-
         </div>
-        <!-- Grid row -->
         <hr class="my-5">
         {% endfor %}
       {% endif %}
@@ -64,10 +59,7 @@
 
       </div>
     <!-------------------------------------------- NUMERACJA ZGLOSZEN -------------------------------------------->
-
   </section>
-  <!-- Section: Block Content -->
-
 
 </div>
 {% endblock %}

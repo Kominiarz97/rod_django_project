@@ -1,19 +1,16 @@
 {% extends 'rod/base.html' %}
 {% block content %}
 <div class="container z-depth-1 p-5 my-5">
-
     {% if not trasy %}
         <div class="alert alert-warning" role="alert">
             <h1>BRAK TRAS W BAZIE!</h1>
         </div>
     {% endif %}
     <input class="btn btn-primary" type="button" value="Dodaj nową trasę"  onclick="location.href='{% url 'rod-new_route' %}'"/>
-
     {% if trasy %}
               <section>
                 <div class="table-responsive">
                   <table class="table product-table table-cart-v-1">
-                  <!---------------------NAGLOWKI--------------------->
                           <thead>
                               <tr>
                                 <th></th>
@@ -31,9 +28,6 @@
                                 </th>
                               </tr>
                             </thead>
-                  <!---------------------NAGLOWKI--------------------->
-
-                  <!---------------------DANE DRONA--------------------->
                     <tbody>
                         {% for trasa in trasy %}
                           <tr>
@@ -59,8 +53,6 @@
                             </tr>
                     {% endfor %}
                     </tbody>
-                  <!---------------------DANE DRONA--------------------->
-
                   </table>
                 </div>
 
@@ -87,6 +79,5 @@
             <a class="btn btn-outline-primary mb-4" href="?page={{ trasy.paginator.num_pages }}">Ostatnia</a>
         {% endif %}
     {% endif %}
-    <!------------------------------------------------------NUMERACJA STRON------------------------------------------------------>
 </div>
 {% endblock %}

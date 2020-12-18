@@ -10,7 +10,6 @@
     {% endif %}
     {% if zgloszenia %}
         {% for zgloszenie in zgloszenia %}
-      <!-- Section: Block Content -->
         <section class="dark-grey-text">
             <h3 class="text-center font-weight-bold mb-4 pb-2">ZGLOSZENIE NUMER: {{  zgloszenie.id_zgloszenia }}</h3>
             <p class="text-center  w-responsive mx-auto mb-5">Dokładne współrzędne geograficzne:<strong> {{ zgloszenie.lokalizacja_gps}}</strong>
@@ -30,8 +29,6 @@
                         <p class="text-muted">{{zgloszenie.trasa.nazwa_trasy}}</p>
                     </div>
                         </li>
-
-
                     <li class="d-flex justify-content-left pl-4">
                     <div>
                     <h5 class="font-weight-bold mb-3">Zgłoszenie pochodzi z drona:</h5>
@@ -49,11 +46,7 @@
               </li>
             </ul>
           </div>
-          <!-- Grid column -->
-
-
         </div>
-        <!-- Grid row -->
         <hr class="my-5">
         {% endfor %}
       {% endif %}
@@ -67,13 +60,7 @@
                     <a class="btn btn-outline-primary mb-4" href="?page={{ num }}">{{ num }}</a>
             {% endif %}
           {% endfor %}
-
       </div>
-    <!-------------------------------------------- NUMERACJA ZGLOSZEN -------------------------------------------->
-
   </section>
-  <!-- Section: Block Content -->
-
-
 </div>
 {% endblock %}
