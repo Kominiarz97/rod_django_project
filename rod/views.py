@@ -178,7 +178,6 @@ def all_archive(request):
         paginator = Paginator(zgloszenia, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-
         return render(request,'rod/all_archive.html',{'tittle':'Wszystkie zgłoszenia', 'zgloszenia':page_obj})
     else:
         return redirect('/')
@@ -191,7 +190,6 @@ def interv_archive(request):
         paginator = Paginator(zgloszenia, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-
         return render(request, 'rod/interv_archive.html',{'title':'Zgłoszenia wymagające interwencji', 'zgloszenia':page_obj})
     else:
         return redirect('/')
@@ -204,8 +202,6 @@ def noninterv_archive(request):
         paginator = Paginator(zgloszenia, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-
-
         return render(request,'rod/noninterv_archive.html',{'title':'Zgłoszenia niewymagające interwencji','zgloszenia':page_obj})
     else:
         return redirect('/')
