@@ -1,12 +1,10 @@
 {% extends 'rod/base.html' %}
-
 {% block content %}
     <div id="map-container-google-1" class="z-depth-1-half map-container">
     <br><br>
     <div class="content-section">
         <div id="mapid"></div>
     </div>
-
 <script>
     var mymap = L.map('mapid').setView([51.2475, 22.5728], 9);
     {% for z in zgloszenia %}
@@ -14,7 +12,6 @@
             const marker{{ z.id_zgloszenia }} = L.marker([0,0]).addTo(mymap);
         {% endif %}
     {% endfor %}
-
     const attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     const tiles = L.tileLayer(tileUrl,attribution)
@@ -24,9 +21,7 @@
             marker{{ z.id_zgloszenia }}.setLatLng([{{ z.lokalizacja_gps }}]).bindPopup('Zgloszenie {{ z.id_zgloszenia }}');
         {% endif %}
     {% endfor %}
-
     marker.setContent()
-
 </script>
     </div>
 {% endblock %}
