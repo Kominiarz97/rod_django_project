@@ -78,12 +78,9 @@ def del_user(request, pk):
             u.delete()
             messages.success(request, "Konto usunięte")
             return redirect('/')
-
         except User.DoesNotExist:
             messages.error(request, "Nie ma takiego użytkownika")
             return redirect('/')
-
         except Exception as e:
             return render(request, 'users/profile.html',{'err':e.message})
-
     return render(request, 'users/user_confirm_delete.html')
